@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produit Vinted - Exemple</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Intégration de FontAwesome pour les icônes -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="logo-container">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Vinted_logo.svg/1200px-Vinted_logo.svg.png" alt="Logo Vinted">
+        </div>
+        <div class="hamburger" onclick="toggleMenu()">
+            <i class="fas fa-bars"></i>
+        </div>
+        <ul class="menu">
+            <li><a href="#">Accueil</a></li>
+            <li><a href="#">Produits</a></li>
+            <li><a href="#">À propos</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </div>
+
+    <!-- Contenu du produit -->
+    <div class="product-container">
+        <!-- Section des images -->
+        <div class="product-images">
+            <img src="https://via.placeholder.com/600x600" alt="Produit" class="main-image">
+            <div class="thumbnail-images">
+                <img src="https://via.placeholder.com/100x100" alt="Thumbnail 1">
+                <img src="https://via.placeholder.com/100x100" alt="Thumbnail 2">
+                <img src="https://via.placeholder.com/100x100" alt="Thumbnail 3">
+            </div>
+        </div>
+
+        <!-- Section de la description -->
+        <div class="product-description-container">
+            <h1 class="product-title">T-shirt en coton - Taille M</h1>
+            <p class="product-description">
+                Un t-shirt en coton de qualité, parfait pour l'été. Très peu porté, presque neuf. Fabriqué avec des matériaux durables, idéal pour les journées chaudes.
+            </p>
+            <p class="product-price">15,00 €</p>
+            <p class="product-location">Lieu: Paris, France</p>
+        </div>
+        <!-- Section de Protection Acheteurs -->
+        <div class="protection-section">
+            <i class="fas fa-shield-alt"></i>
+            <p>Frais de Protection Acheteurs</p>
+            <p>Pour tout achat effectué par le biais du bouton Acheter, nous appliquons des frais couvrant notre Protection acheteurs. Cette Protection acheteurs comprend notre <a href="#">Politique de Remboursement</a>.</p>
+        </div>
+
+
+
+        <!-- Boutons -->
+        <div class="product-buttons-container">
+            <button class="buy-button" onclick="window.location.href = 'paiement.html';">Faire une offre</button>
+            <button class="buy-button" onclick="window.location.href = 'paiement.html';">Acheter</button>
+        </div>
+        
+       
+
+        <!-- Icônes -->
+        <div class="icons-container">
+            <i class="fas fa-heart" title="Ajouter aux favoris"></i>
+            <i class="fas fa-share-alt" title="Partager"></i>
+            <i class="fas fa-comment" title="Contacter"></i>
+        </div>
+    </div>
+
+    <script>
+       
+
+        function toggleMenu() {
+            const menu = document.querySelector('.menu');
+            menu.classList.toggle('show');
+        }
+    </script>
+</body>
+</html>
