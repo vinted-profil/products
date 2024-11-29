@@ -282,20 +282,19 @@
         <option value="" disabled selected>Choisissez un mode de paiement</option>
         <option value="credit_card">Carte bancaire</option>
     </select>
-
-    <button type="button" onclick="openPaymentModal()">Payer maintenant</button>
-</div>
-
-<!-- Script Stripe -->
+    <!-- Script Stripe -->
 <script async src="https://js.stripe.com/v3/buy-button.js"></script>
 
-<!-- Composant Stripe caché -->
-<stripe-buy-button
-  id="stripe-buy-button"
+    <stripe-buy-button
   buy-button-id="buy_btn_1QQCVqGCIYFfst069V2cWJIf"
   publishable-key="pk_live_51QQB3vGCIYFfst06iPAPeLt8acZd003PtYWf7LVB1dA5tsZ8foOAntBve1sRfGovu5JzdSvCJ6t9Kv0DqSvFfQXf00pLhuis6c"
- ">
+>
 </stripe-buy-button>
+</div>
+
+
+
+
 
 
     
