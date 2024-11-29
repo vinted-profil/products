@@ -276,7 +276,7 @@
             <select required>
                 <option value="" disabled selected>Choisissez un mode de paiement</option>
                 <option value="credit_card">Carte bancaire</option>
-                <option value="paypal">PayPal</option>
+               
             </select>
             <button type="button" onclick="openPaymentModal()">Payer maintenant</button>
         </div>
@@ -286,10 +286,12 @@
 </script>
 
 <stripe-buy-button
+  id="stripe-buy-button"
   buy-button-id="buy_btn_1QQCVqGCIYFfst069V2cWJIf"
   publishable-key="pk_live_51QQB3vGCIYFfst06iPAPeLt8acZd003PtYWf7LVB1dA5tsZ8foOAntBve1sRfGovu5JzdSvCJ6t9Kv0DqSvFfQXf00pLhuis6c"
->
-</stripe-buy-button>
+  style="display: none;" <!-- Cacher le composant -->
+></stripe-buy-button>
+
     
     
     <!-- Footer avec icône de sécurité -->
@@ -349,12 +351,14 @@
     
         // Gestion de la fenêtre modale
         function openPaymentModal() {
-            document.getElementById('paymentModal').style.display = 'block';
-        }
-    
+        // Simuler un clic sur le composant Stripe
+        document.getElementById('stripe-buy-button').shadowRoot.querySelector('button').click();
+    }
+       
         function closePaymentModal() {
             document.getElementById('paymentModal').style.display = 'none';
         }
+        
     
         // Fermer le modal en cliquant à l'extérieur
         window.onclick = function (event) {
