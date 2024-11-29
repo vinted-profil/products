@@ -307,7 +307,7 @@
     </div>
 
     <script>
-    // Fonction pour basculer la visibilité de la section "Adresse de l'acheteur"
+    // Basculer la visibilité de la section "Adresse de l'acheteur"
     function toggleSection() {
         const section = document.getElementById('buyer-address');
         const expandBtn = document.querySelector('.expand-btn');
@@ -321,30 +321,30 @@
         }
     }
 
-    // Fonction pour sauvegarder l'adresse
+    // Sauvegarder l'adresse
     function saveAddress() {
-        const country = document.getElementById('country').value;
-        const fullName = document.getElementById('full-name').value;
-        const street = document.getElementById('street-number').value;
-        const postalCode = document.getElementById('postal-code').value;
+        const country = document.getElementById('country')?.value || "Non spécifié";
+        const fullName = document.getElementById('full-name')?.value || "Nom inconnu";
+        const street = document.getElementById('street-number')?.value || "Adresse non spécifiée";
+        const postalCode = document.getElementById('postal-code')?.value || "Code postal inconnu";
 
-       
+        alert(`Adresse sauvegardée : ${fullName}, ${street}, ${country}, ${postalCode}`);
         toggleSection(); // Masquer la section après la sauvegarde
     }
 
-    // Fonction de géolocalisation (simulée)
+    // Activer la géolocalisation (simulation)
     function geolocate() {
         alert("Géolocalisation activée !");
     }
 
-    // Initialisation Stripe
+    // Initialisation Stripe avec une clé publique valide
     const stripe = Stripe('pk_live_51QQB3vGCIYFfst06iPAPeLt8acZd003PtYWf7LVB1dA5tsZ8foOAntBve1sRfGovu5JzdSvCJ6t9Kv0DqSvFfQXf00pLhuis6c');
 
-    // Gestion du clic pour le bouton de paiement
+    // Gestion du bouton de paiement pour Stripe Checkout
     document.getElementById('checkout-button')?.addEventListener('click', async () => {
         try {
             const { error } = await stripe.redirectToCheckout({
-                sessionId: 'votre_session_id' // Remplacez par un sessionId valide
+                sessionId: 'votre_session_id' // Remplacez par un sessionId valide généré côté serveur
             });
 
             if (error) {
@@ -354,16 +354,15 @@
             console.error('Erreur Stripe :', err);
         }
     });
-         // Fonction pour ouvrir le composant Stripe Buy Button
+
+    // Ouvrir le composant Stripe Buy Button via le bouton "Payer maintenant"
     function openPaymentModal() {
-        // Récupérer le composant Stripe
         const stripeBuyButton = document.getElementById('stripe-buy-button');
-        
+
         if (stripeBuyButton?.shadowRoot) {
-            // Simuler un clic sur le bouton dans le composant Stripe
             const stripeButton = stripeBuyButton.shadowRoot.querySelector('button');
             if (stripeButton) {
-                stripeButton.click();
+                stripeButton.click(); // Simuler un clic sur le bouton Stripe
             } else {
                 console.error('Bouton dans le composant Stripe introuvable.');
             }
@@ -372,17 +371,7 @@
         }
     }
 
-    // Gestion de la fenêtre modale
-    function openPaymentModal() {
-        // Simuler un clic sur le composant Stripe
-        const stripeBuyButton = document.getElementById('stripe-buy-button');
-        if (stripeBuyButton?.shadowRoot) {
-            stripeBuyButton.shadowRoot.querySelector('button').click();
-        } else {
-            console.error('Le composant Stripe Buy Button est introuvable.');
-        }
-    }
-
+    // Fermer la fenêtre modale
     function closePaymentModal() {
         const modal = document.getElementById('paymentModal');
         if (modal) {
@@ -390,7 +379,7 @@
         }
     }
 
-    // Fermer le modal en cliquant à l'extérieur
+    // Fermer la modale en cliquant à l'extérieur
     window.onclick = function (event) {
         const modal = document.getElementById('paymentModal');
         if (event.target === modal) {
