@@ -302,15 +302,6 @@ body {
     color: #f4b400; /* Couleur des étoiles */
 }
 
-@media (max-width: 768px) {
-    .seller-profile {
-        flex-direction: column; /* Stacker les éléments sur petits écrans */
-        text-align: center;
-    }
 
-    .seller-info {
-        justify-content: center;
-    }
-}
 
    
