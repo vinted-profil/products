@@ -301,75 +301,77 @@
     </div>
 
     <script>
-        // Fonction pour basculer la visibilité de la section "Adresse de l'acheteur"
-        function toggleSection() {
-            const section = document.getElementById('buyer-address');
-            const expandBtn = document.querySelector('.expand-btn');
-    
-            if (section.style.display === "none" || section.style.display === "") {
-                section.style.display = "block"; // Afficher la section
-                expandBtn.textContent = "Adresse de l'acheteur -"; // Mettre à jour l'étiquette
-            } else {
-                section.style.display = "none"; // Masquer la section
-                expandBtn.textContent = "Adresse de l'acheteur +"; // Remettre l'étiquette d'origine
-            }
+    // Fonction pour basculer la visibilité de la section "Adresse de l'acheteur"
+    function toggleSection() {
+        const section = document.getElementById('buyer-address');
+        const expandBtn = document.querySelector('.expand-btn');
+
+        if (section.style.display === "none" || section.style.display === "") {
+            section.style.display = "block"; // Afficher la section
+            expandBtn.textContent = "Adresse de l'acheteur -"; // Mettre à jour l'étiquette
+        } else {
+            section.style.display = "none"; // Masquer la section
+            expandBtn.textContent = "Adresse de l'acheteur +"; // Remettre l'étiquette d'origine
         }
-    
-        // Fonction pour sauvegarder l'adresse
-        function saveAddress() {
-            const country = document.getElementById('country').value;
-            const fullName = document.getElementById('full-name').value;
-            const street = document.getElementById('street-number').value;
-            const postalCode = document.getElementById('postal-code').value;
-    
-            alert(`Adresse sauvegardée : ${fullName}, ${street}, ${country}, ${postalCode}`);
-            toggleSection(); // Masquer la section après la sauvegarde
-        }
-    
-        // Fonction de géolocalisation (simulée)
-        function geolocate() {
-            alert("Géolocalisation activée !");
-        }
-    
-        // Intégration Stripe - Initialisation
-        const stripe = Stripe('pk_live_51QQB3vGCIYFfst06iPAPeLt8acZd003PtYWf7LVB1dA5tsZ8foOAntBve1sRfGovu5JzdSvCJ6t9Kv0DqSvFfQXf00pLhuis6c');
-    
-        // Gestion du clic pour le bouton de paiement
-        document.getElementById('checkout-button').addEventListener('click', async () => {
-            try {
-                const { error } = await stripe.redirectToCheckout({
-                    sessionId: 'votre_session_id' // Générez cette session dans votre tableau de bord ou via l'API
-                });
-    
-                if (error) {
-                    console.error('Erreur lors de la redirection :', error);
-                }
-            } catch (err) {
-                console.error('Erreur Stripe :', err);
-            }
-        });
-    
-        // Gestion de la fenêtre modale
-        function openPaymentModal() {
-        // Simuler un clic sur le composant Stripe
-        document.getElementById('stripe-buy-button').shadowRoot.querySelector('button').click();
     }
+
+    // Fonction pour sauvegarder l'adresse
+    function saveAddress() {
+        const country = document.getElementById('country').value;
+        const fullName = document.getElementById('full-name').value;
+        const street = document.getElementById('street-number').value;
+        const postalCode = document.getElementById('postal-code').value;
+
        
-        function closePaymentModal() {
-            document.getElementById('paymentModal').style.display = 'none';
-        }
-        
-    
-        // Fermer le modal en cliquant à l'extérieur
-        window.onclick = function (event) {
-            const modal = document.getElementById('paymentModal');
-            if (event.target === modal) {
-                closePaymentModal();
+        toggleSection(); // Masquer la section après la sauvegarde
+    }
+
+    // Fonction de géolocalisation (simulée)
+    function geolocate() {
+        alert("Géolocalisation activée !");
+    }
+
+    // Initialisation Stripe
+    const stripe = Stripe('pk_live_51QQB3vGCIYFfst06iPAPeLt8acZd003PtYWf7LVB1dA5tsZ8foOAntBve1sRfGovu5JzdSvCJ6t9Kv0DqSvFfQXf00pLhuis6c');
+
+    // Gestion du clic pour le bouton de paiement
+    document.getElementById('checkout-button')?.addEventListener('click', async () => {
+        try {
+            const { error } = await stripe.redirectToCheckout({
+                sessionId: 'votre_session_id' // Remplacez par un sessionId valide
+            });
+
+            if (error) {
+                console.error('Erreur lors de la redirection :', error);
             }
+        } catch (err) {
+            console.error('Erreur Stripe :', err);
         }
-    
-       
-    </script>
-    <script
-</stripe-buy-button>
-    
+    });
+
+    // Gestion de la fenêtre modale
+    function openPaymentModal() {
+        // Simuler un clic sur le composant Stripe
+        const stripeBuyButton = document.getElementById('stripe-buy-button');
+        if (stripeBuyButton?.shadowRoot) {
+            stripeBuyButton.shadowRoot.querySelector('button').click();
+        } else {
+            console.error('Le composant Stripe Buy Button est introuvable.');
+        }
+    }
+
+    function closePaymentModal() {
+        const modal = document.getElementById('paymentModal');
+        if (modal) {
+            modal.style.display = 'none';
+        }
+    }
+
+    // Fermer le modal en cliquant à l'extérieur
+    window.onclick = function (event) {
+        const modal = document.getElementById('paymentModal');
+        if (event.target === modal) {
+            closePaymentModal();
+        }
+    };
+</script>
