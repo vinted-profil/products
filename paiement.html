@@ -262,35 +262,41 @@
         </div>
         
 
-        <!-- Formulaire de livraison -->
-        <div class="payment-form">
-            <h3>Détails de la livraison</h3>
-            <input type="text" placeholder="Choisir un point de relais" required>
-            
-        </div>
+       <!-- Formulaire de livraison -->
+<div class="payment-form">
+    <h3>Détails de la livraison</h3>
+    <input type="text" placeholder="Choisir un point de relais" required>
+</div>
 
-        <!-- Formulaire numéro de téléphone et méthode de paiement -->
-        <div class="payment-form">
-            <input type="tel" placeholder="Numéro de téléphone" required pattern="\d{10}" title="Entrez un numéro valide à 10 chiffres">
+<!-- Formulaire numéro de téléphone et méthode de paiement -->
+<div class="payment-form">
+    <input 
+        type="tel" 
+        placeholder="Numéro de téléphone" 
+        required 
+        pattern="\d{10}" 
+        title="Entrez un numéro valide à 10 chiffres"
+    >
 
-            <select required>
-                <option value="" disabled selected>Choisissez un mode de paiement</option>
-                <option value="credit_card">Carte bancaire</option>
-               
-            </select>
-            <button type="button" onclick="openPaymentModal()">Payer maintenant</button>
-        </div>
-    </div>
-    <script async
-  src="https://js.stripe.com/v3/buy-button.js">
-</script>
+    <select required>
+        <option value="" disabled selected>Choisissez un mode de paiement</option>
+        <option value="credit_card">Carte bancaire</option>
+    </select>
 
+    <button type="button" onclick="openPaymentModal()">Payer maintenant</button>
+</div>
+
+<!-- Script Stripe -->
+<script async src="https://js.stripe.com/v3/buy-button.js"></script>
+
+<!-- Composant Stripe caché -->
 <stripe-buy-button
   id="stripe-buy-button"
   buy-button-id="buy_btn_1QQCVqGCIYFfst069V2cWJIf"
   publishable-key="pk_live_51QQB3vGCIYFfst06iPAPeLt8acZd003PtYWf7LVB1dA5tsZ8foOAntBve1sRfGovu5JzdSvCJ6t9Kv0DqSvFfQXf00pLhuis6c"
-  style="display: none;" <!-- Cacher le composant -->
-></stripe-buy-button>
+  style="display: none;">
+</stripe-buy-button>
+
 
     
     
@@ -348,6 +354,23 @@
             console.error('Erreur Stripe :', err);
         }
     });
+         // Fonction pour ouvrir le composant Stripe Buy Button
+    function openPaymentModal() {
+        // Récupérer le composant Stripe
+        const stripeBuyButton = document.getElementById('stripe-buy-button');
+        
+        if (stripeBuyButton?.shadowRoot) {
+            // Simuler un clic sur le bouton dans le composant Stripe
+            const stripeButton = stripeBuyButton.shadowRoot.querySelector('button');
+            if (stripeButton) {
+                stripeButton.click();
+            } else {
+                console.error('Bouton dans le composant Stripe introuvable.');
+            }
+        } else {
+            console.error('Le composant Stripe Buy Button est introuvable ou non chargé.');
+        }
+    }
 
     // Gestion de la fenêtre modale
     function openPaymentModal() {
